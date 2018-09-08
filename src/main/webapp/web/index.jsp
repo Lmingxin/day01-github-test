@@ -123,7 +123,7 @@
             <img src="${pageContext.request.contextPath }/${computer.image }" alt=""/>
             <p class="bottom_ys2">${computer.title }</p>
             <p class="bottom_ys3">￥${computer.price }.00</p>
-            <p class="bottom_ys4 color_2"><a href="?id=${computer.id }">查看详情</a></p>
+            <p class="bottom_ys4 color_2"><a href="../goods/details.do?id=${computer.id }">查看详情</a></p>
         </div>
         </c:forEach>
     </div>

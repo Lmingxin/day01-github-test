@@ -57,6 +57,7 @@
 	<select id="getGoodsCategoryById"
 		resultType="cn.tedu.store.entity.GoodsCategory">
 		SELECT 
+			id
 			name
 		FROM 
 			t_goods_category

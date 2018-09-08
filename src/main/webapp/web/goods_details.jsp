@@ -1,3 +1,6 @@
+<%@ page contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -39,14 +42,14 @@
 <!-- 内容-->
 <!--细节导航-->
 <div id="nav_detail">
-    <h5>首页 > 学习用品 > 笔记本电脑 > 联想Lenovo-YOGA 700></h5>
+    <h5>首页 &gt; 学习用品 &gt; 笔记本电脑 &gt; ${ goods.itemType }&gt;</h5>
 </div>
 <!--产品预览-->
 <div id="shop_detail">
     <!-- 左侧-->
     <div id="preview" class="lf">
         <div id="mediumDiv">
-            <img id="mImg" src="../images/product_detail/product_detail_img15.png"/>
+            <img width="460px" id="mImg" src="${ pageContext.request.contextPath }/${goods.image}"/>
         </div>
         <div id="icon_all">
             <ul id="icon_list">
@@ -61,12 +64,12 @@
     <!-- 右侧-->
     <div class="right_detail lf">
         <!-- 商品名称-->
-        <h1>Lenovo-YOGA 700</h1>
+        <h1>${ goods.itemType }</h1>
         <!-- 商品全称-->
-        <h3>(i7-7500U 8G 256GSSD 2G独显 全高清IPS 360°翻转 正版office)</h3>
+        <h3>${ goods.title }</h3>
         <!-- 价格部分-->
         <div class="price">
-            <div id="pro_price"><b>学员售价：</b><span>￥5999.00</span></div>
+            <div id="pro_price"><b>学员售价：</b><span>${ goods.price}.00</span></div>
             <div class="promise">
                 <b>服务承诺：</b>
                 <span>*退货补运费</span>
@@ -91,9 +94,9 @@
         <!-- 规格-->
         <p>
             <s>规格：</s>
-            <span class="avenge">15寸 15 1T</span>
-            <span class="avenge">18寸 18 2T</span>
-            <span class="avenge">19寸 19 3T</span>
+            <c:forEach items="${ goodsList }" var="g">
+            	<span class="avenge"><a href="?id=${ g.id }">${ g.title }</a></span>
+			</c:forEach>
         </p>
         <!-- 未选择规格，颜色时状态-->
         <div class="message"></div>
@@ -361,12 +364,12 @@
         })
         console.log(color)
         //规格取值
-        $(".avenge").each(function () {
-            if ($(this).hasClass("borderChange")) {
-                norms = $(this).html();
-            }
-        })
-        console.log(norms)
+        //$(".avenge").each(function () {
+        //  if ($(this).hasClass("borderChange")) {
+        //        norms = $(this).html();
+        //    }
+        //})
+        //console.log(norms)
         //数量取值
         buyAccount = $("#buy-num").val();
         console.log(buyAccount);
@@ -469,6 +472,7 @@
         })
 
         /**ajax提交**/
+        /*
         $(".avenge").each(function (i, item) {
             $(this).click(function (norms) {
                 $(this).addClass("borderChange")
@@ -480,6 +484,7 @@
                 console.log(norms)
             })
         })
+        */
         //颜色选择
         $("#choose_color input").each(function (i, item) {
             $(this).click(function () {

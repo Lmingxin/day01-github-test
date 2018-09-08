@@ -37,10 +37,12 @@
 
 		<!-- mysql数据库 -->
 		<dependency>
-			<groupId>MySQL</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.6</version>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.9</version>
 		</dependency>
+		
+				
 
 		<!-- mybatis -->
 		<dependency>

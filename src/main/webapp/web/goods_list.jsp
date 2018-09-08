@@ -10,6 +10,28 @@
 <link rel="stylesheet" href="../css/header.css" />
 <link rel="stylesheet" href="../css/search.css" />
 <link rel="stylesheet" href="../css/footer.css" />
+<style type="text/css">
+#pages {
+}
+#pages ol {
+}
+#pages ol li {
+	float: left;
+	width: 30px;
+	height: 30px;
+	margin: 0 10px 0 0;
+	border: 1px solid #aaa;
+}
+#pages ol li a {
+	text-align: center;
+	display: block;
+	line-height: 30px;
+	font-size: 14px;
+}
+#pages ol li a:hover {
+	background: #fff;
+}
+</style>
 </head>
 <c:import url="header.jsp"></c:import>
 
@@ -17,21 +39,40 @@
 	<div class="big">
 		<form name="" action="" method="post">
 			<section id="section">
-				<p class="header">全部结果 > ${goodsCategory.name }</p>
+				<p class="header">全部结果 &gt; ${goodsCategory.name }</p>
 				<div id="wrap">
 					<c:forEach items="${goodsList }" var="goods">
 					<div class="lf" id="d1" 
 						style="width: 230px; height: 270px; padding: 10px;">
 						<div class="img">
+						<a href="details.do?id=${goods.id}">
 							<img src="${pageContext.request.contextPath }/${goods.image }" alt="" onclick="toItemInfo(${item.id})" />
+						</a>
 						</div>			
 						<div class="describe">
-							<p>${goods.title }</p>
+							<p><a href="details.do?id=${goods.id}">${goods.title }</a></p>
 							<span class="price"><b>￥</b><span class="priceContent">${goods.price }.00</span></span>
 							<span class="addCart"><img id="collect" src="../images/search/care.png" alt="" /><a href="javascript:void(0);" class="add_cart">加入购物车</a></span>
 						</div>
 					</div>
 					</c:forEach>
+					<div style="clear: both;"></div>
+					
+					<!-- 分页 -->
+					<div id="pages">
+						<ol>
+							<c:forEach begin="1" end="${pages }" var="i">
+							<c:if test="${i == page }">
+							<li><a href="###">${i }</a></li>
+							</c:if>
+							
+							<c:if test="${i != page }">
+							<li><a href="?category_id=${goodsCategory.id }&page=${i}">${i }</a></li>
+							</c:if>
+							</c:forEach>
+							<div style="clear: both;"></div>
+						</ol>
+					</div>
 				</div>
 			</section>
 		</form>

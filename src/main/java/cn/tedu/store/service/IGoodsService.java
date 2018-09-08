@@ -36,4 +36,14 @@ public interface IGoodsService {
 	List<Goods> getGoodsListByCategory(
 			Long categoryId, Integer count);
 	
+	Integer getGoodsCountByCategory(Long categoryId);
+	
+	Goods getGoodsById(Long id);
+	
+	/**
+	 * 根据item_type查询对应条件下的所有数据
+	 * @param itemType	itemType属性的值
+	 * @return	返回所有与item_type值相同的商品的集合
+	 */
+	List<Goods> getGoodsListByItemType(String itemType);
 }

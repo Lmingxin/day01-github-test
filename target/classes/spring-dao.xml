@@ -45,7 +45,7 @@
 	</bean>
   
 	<!-- 持久层接口的扫描 -->
-	<bean id="scannerConfigurer"
+	<bean id="scannerConfigurer" 
   		class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" 
   	          value="cn.tedu.store.mapper"/>

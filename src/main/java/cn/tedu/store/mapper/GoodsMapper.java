@@ -27,4 +27,19 @@ public interface GoodsMapper {
 			@Param("offset") Integer offset, 
 			@Param("countPerPage") Integer countPerPage);
 	
+	/**
+	 * 根据商品分类id获取商品数量
+	 * @param categoryId	商品id
+	 * @return	返回某个分类下的商品数量
+	 */
+	Integer getGoodsCountByCategory(Long categoryId);
+	
+	Goods getGoodsById(Long id);
+	
+	/**
+	 * 根据商品型号获取商品
+	 * @param itemType	商品型号
+	 * @return	返回同型号的商品的列表
+	 */
+	List<Goods> getGoodsListByItemType(String itemType);
 }
