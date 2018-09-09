@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -12,44 +13,19 @@
     <link rel="stylesheet" href="../css/footer.css"/>
 </head>
 <body>
-<!-- 页面顶部-->
-<header id="top" class="fixed_nav">
-    <div id="logo" class="lf">
-        <img class="animated jello" src="../images/header/logo.png" alt="logo"/>
-    </div>
-    <div id="top_input" class="lf">
-        <input id="input" type="text" placeholder="请输入您要搜索的内容"/>
-        <a href="search.html" class="rt"><img id="search" src="../images/header/search.png" alt="搜索"/></a>
-    </div>
-    <div class="rt">
-        <ul class="lf">
-            <li><a href="favorites.html" title="我的收藏"><img class="care" src="../images/header/care.png" alt=""/></a><b>|</b></li>
-            <li><a href="orders.html" title="我的订单"><img class="order" src="../images/header/order.png" alt=""/></a><b>|</b></li>
-            <li><a href="cart.html" title="我的购物车"><img class="shopcar" src="../images/header/shop_car.png" alt=""/></a><b>|</b></li>
-            <li><a href="help.html">帮助</a><b>|</b></li>
-            <li><a href="login.html">登录</a></li>
-        </ul>
-    </div>
-</header>
-<!-- nav主导航-->
-<nav id="nav">
-    <ul>
-        <li><a href="index.html" class="acti">首页</a></li>
-        <li><a href="index.html#computer" >电脑办公</a></li>
-        <li><a href="index.html#stationery" >办公文具</a></li>
-    </ul>
-</nav>
+<c:import url="header.jsp"></c:import>
+
 <!-- 内容-->
 <!--细节导航-->
 <div id="nav_detail">
-    <h5>首页 &gt; 学习用品 &gt; 笔记本电脑 &gt; ${ goods.itemType }&gt;</h5>
+    <h5>首页 &gt; 学习用品 &gt; 笔记本电脑 &gt; ${goods.itemType } &gt;</h5>
 </div>
 <!--产品预览-->
 <div id="shop_detail">
     <!-- 左侧-->
     <div id="preview" class="lf">
         <div id="mediumDiv">
-            <img width="460px" id="mImg" src="${ pageContext.request.contextPath }/${goods.image}"/>
+            <img width="460" id="mImg" src="${pageContext.request.contextPath }/${goods.image }"/>
         </div>
         <div id="icon_all">
             <ul id="icon_list">
@@ -64,12 +40,12 @@
     <!-- 右侧-->
     <div class="right_detail lf">
         <!-- 商品名称-->
-        <h1>${ goods.itemType }</h1>
+        <h1>${goods.itemType }</h1>
         <!-- 商品全称-->
-        <h3>${ goods.title }</h3>
+        <h3>${goods.title }</h3>
         <!-- 价格部分-->
         <div class="price">
-            <div id="pro_price"><b>学员售价：</b><span>${ goods.price}.00</span></div>
+            <div id="pro_price"><b>学员售价：</b><span>￥${goods.price }.00</span></div>
             <div class="promise">
                 <b>服务承诺：</b>
                 <span>*退货补运费</span>
@@ -94,9 +70,9 @@
         <!-- 规格-->
         <p>
             <s>规格：</s>
-            <c:forEach items="${ goodsList }" var="g">
-            	<span class="avenge"><a href="?id=${ g.id }">${ g.title }</a></span>
-			</c:forEach>
+            <c:forEach items="${goodsList }" var="g">
+            <span class="avenge"><a href="?id=${g.id }">${g.title }</a></span>
+            </c:forEach>
         </p>
         <!-- 未选择规格，颜色时状态-->
         <div class="message"></div>
@@ -104,13 +80,19 @@
         <p class="accountChose">
             <s>数量：</s>
             <button class="numberMinus">-</button>
-            <input type="text" value="1" class="number" id="buy-num">
+            <form id="cart-form">
+            <input type="text" name="num" value="1" class="number" id="buy-num">
+            <input type="hidden" name="goodsId" value="${goods.id }" />
+            <input type="hidden" name="goodsTitle" value="${goods.title }" />
+            <input type="hidden" name="goodsPrice" value="${goods.price }" />
+            <input type="hidden" name="goodsImage" value="${goods.image }" />
+            </form>
             <button class="numberAdd">+</button>
         </p>
         <!-- 购买部分-->
         <div class="shops">
             <a href="cart.html" class="buy lf" id="buy_now">立即购买</a>
-            <a href="#" class="shop lf" id="add_cart"><img src="../images/product_detail/product_detail_img7.png" alt=""/>加入购物车</a>
+            <a href="###" class="shop lf" id="add_cart"><img src="../images/product_detail/product_detail_img7.png" alt=""/>加入购物车</a>
             <a href="#" class="collection lf" id="collect"><span>收藏</span></a><b><img src="../images/product_detail/product_detail_img6.png"                                                                       alt=""/></b>
         </div>
     </div>
@@ -365,55 +347,15 @@
         console.log(color)
         //规格取值
         //$(".avenge").each(function () {
-        //  if ($(this).hasClass("borderChange")) {
+        //    if ($(this).hasClass("borderChange")) {
         //        norms = $(this).html();
         //    }
         //})
-        //console.log(norms)
+        console.log(norms)
         //数量取值
         buyAccount = $("#buy-num").val();
         console.log(buyAccount);
     }
-    $("#add_cart").click(function (e) {
-		location.href="cart.html";
-        e.preventDefault();
-        getPro();
-        //如果未选择，请选择商品信息
-        //if (!color || !norms ) {
-//            $("#add_cart").text("加入购物车").css({"background":"#f5f5f5","color":"#000"})
-        //    alert("请选择商品信息");
-        //}else{
-       // 	$(".modal").show();
-        //	$(".modal_information span").html("是否将您的宝贝加入购物车");
-			//}
-        //$('.no').click(function(){
-        //	$('.modal').hide();
-        //})
-        var params = {
-            itemColor: color,
-            itemModel: norms,
-            num: buyAccount,
-			//商品id    temId:${item.id}
-        };
-/*        $.ajax({
-            type: "post",
-            url: "/insertToCart.html",
-            data: params,
-            success: function (data) {
-                if (data == '200') {
-                    alert("添加购物车成功！");
-                } else if (data == 500) {
-                    alert("添加购物车失败！");
-                } else {
-                    alert("您还没登录呢！");
-                    window.location.href = data;
-                }
-            },
-            error: function (data) {
-//              alert("系统异常！");
-            }
-        });*/
-    })
     /**添加到收藏**/
     $("#collect").click(function (e){
         e.preventDefault();
@@ -472,19 +414,17 @@
         })
 
         /**ajax提交**/
-        /*
-        $(".avenge").each(function (i, item) {
-            $(this).click(function (norms) {
-                $(this).addClass("borderChange")
-                if ($(this).siblings().addClass("borderChange")) {
-                    $(this).siblings().removeClass("borderChange")
-                }
-                //规格选择
-                var norms = $(this).html();
-                console.log(norms)
-            })
+        //$(".avenge").each(function (i, item) {
+        //   $(this).click(function (norms) {
+        //        $(this).addClass("borderChange")
+        //        if ($(this).siblings().addClass("borderChange")) {
+        //            $(this).siblings().removeClass("borderChange")
+        //        }
+        //        //规格选择
+        //        var norms = $(this).html();
+        //        console.log(norms)
+        //    })
         })
-        */
         //颜色选择
         $("#choose_color input").each(function (i, item) {
             $(this).click(function () {
@@ -540,5 +480,39 @@
         $(this).siblings().children('img').css('border','');
     })
 </script>
-</body>
+
+<script type="text/javascript">
+$("#add_cart").click(function(e) {
+	// 提交到的路径
+	var url = "../cart/add.do";
+	// 提交的数据
+	var data = $("#cart-form").serialize();
+	
+	// 提交并处理ajax请求
+	$.ajax({
+		"url": url,
+		"data": data,
+		"type": "POST",
+		"dataType": "json",
+		"success": function(obj) {
+			if (obj.state == 1) {
+				alert("添加成功！");
+			} else {
+				alert("添加失败！" + obj.message);
+			}
+		},
+		"error": function(){
+		}
+	});
+});
+</script>
 </html>
+
+
+
+
+
+
+
+
+

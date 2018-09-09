@@ -1,3 +1,7 @@
+<%@ page contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -8,33 +12,8 @@
     <link rel="stylesheet" href="../css/cart.css"/>
 </head>
 <body>
-<!-- 页面顶部-->
-<header id="top" class="fixed_nav">
-    <div id="logo" class="lf">
-        <img class="animated jello" src="../images/header/logo.png" alt="logo"/>
-    </div>
-    <div id="top_input" class="lf">
-        <input id="input" type="text" placeholder="请输入您要搜索的内容"/>
-        <a href="search.html" class="rt"><img id="search" src="../images/header/search.png" alt="搜索"/></a>
-    </div>
-    <div class="rt">
-        <ul class="lf">
-            <li><a href="favorites.html" title="我的收藏"><img class="care" src="../images/header/care.png" alt=""/></a><b>|</b></li>
-            <li><a href="orders.html" title="我的订单"><img class="order" src="../images/header/order.png" alt=""/></a><b>|</b></li>
-            <li><a href="cart.html" title="我的购物车"><img class="shopcar" src="../images/header/shop_car.png" alt=""/></a><b>|</b></li>
-            <li><a href="help.html">帮助</a><b>|</b></li>
-            <li><a href="login.html">登录</a></li>
-        </ul>
-    </div>
-</header>
-<!-- nav主导航-->
-<nav id="nav">
-    <ul>
-        <li><a href="index.html" class="acti">首页</a></li>
-        <li><a href="index.html#computer" >电脑办公</a></li>
-        <li><a href="index.html#stationery" >办公文具</a></li>
-    </ul>
-</nav>
+<c:import url="header.jsp"></c:import>
+
 <div class="modal" style="display:none">
     <div class="modal_dialog">
         <div class="modal_header">
@@ -85,6 +64,8 @@
                     <div class="totle_top">金额</div>
                     <div class="del_top">操作</div>
                 </div>
+                
+                <c:forEach items="${carts }" var="cart">
                 <div class="imfor">
                     <div class="check">
                         <div class="Each">
@@ -96,108 +77,30 @@
                     </div>
                     <div class="pudc">
                         <div class="pudc_information" id="pudcId3">
-                            <img src="../images/cart/product_simg1.png" class="lf"/>
+                            <img width="84" height="84" src="${pageContext.request.contextPath }/${cart.goodsImage }" class="lf"/>
                             <input type="hidden" name="" value="">
                         <span class="des lf">
-                            联想(Lenovo)YOGA5 PRO 标配版电脑(i5-7200u 8G 512G SSD FHD IPS)银
+                            ${cart.goodsTitle }
                               <input type="hidden" name="" value="">
                         </span>
-                            <p class="col lf"><span>颜色：</span><span class="color_des">深空灰  <input type="hidden" name="" value=""></span></p>
+                            <p class="col lf"><span>颜色：</span><span class="color_des">---  <input type="hidden" name="" value=""></span></p>
                         </div>
                     </div>
                     <div class="pices">
                         <p class="pices_des">达内专享价</p>
-                        <p class="pices_information"><b>￥</b><span>4888.00  <input type="hidden" name="" value=""></span></p>
+                        <p class="pices_information"><b>￥</b><span>${cart.goodsPrice }.00  <input type="hidden" name="" value=""></span></p>
                     </div>
-                    <div class="num"><span class="reduc">&nbsp;-&nbsp;</span><input type="text" value="1" ><span class="add">&nbsp;+&nbsp;</span></div>
+                    <div class="num"><span class="reduc">&nbsp;-&nbsp;</span><input type="text" value="${cart.num }" ><span class="add">&nbsp;+&nbsp;</span></div>
                     <div class="totle">
                         <span>￥</span>
-                        <span class="totle_information">4888.00</span>
+                        <span class="totle_information">${cart.goodsPrice * cart.num }.00</span>
                     </div>
                     <div class="del">
-                        <!-- <div>
-                            <img src="img/true.png" alt=""/>
-                            <span>已移入收藏夹</span>
-                        </div>
-                         <a href="javascript:;" class="del_yr">移入收藏夹</a>
-                        -->
+                      
                         <a href="javascript:;" class="del_d">删除</a>
                     </div>
                 </div>
-                <div class="imfor">
-                    <div class="check">
-                        <div class="Each">
-                            <span class="normal">
-                                <img src="../images/cart/product_normal.png" alt=""/>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="pudc">
-                        <div class="pudc_information" id="pudcId1">
-                            <img src="../images/cart/product_simg1.png" class="lf"/>
-                            <input type="hidden" name="" value="">
-                         <span class="des lf">
-                            联想(Lenovo)YOGA5 PRO 标配版电脑(i5-7200u 8G 512G SSD FHD IPS)银
-                             <input type="hidden" name="" value="">
-                        </span>
-                            <p class="col lf"><span>颜色：</span><span class="color_des">玫瑰金  <input type="hidden" name="" value=""></span></p>
-                        </div>
-                    </div>
-                    <div class="pices">
-                        <p class="pices_des">达内专享价</p>
-                        <p class="pices_information"><b>￥</b><span>4888.00</span></p>
-                    </div>
-                    <div class="num"><span class="reduc">&nbsp;-&nbsp;</span><input type="text" value="1" /><span class="add">&nbsp;+&nbsp;</span></div>
-                    <div class="totle">
-                        <span>￥</span>
-                        <span class="totle_information">4888.00</span>
-                    </div>
-                    <div class="del">
-                       <!-- <div>
-                            <img src="img/true.png" alt=""/>
-                            <span>已移入收藏夹</span>
-                        </div>
-                         <a href="javascript:;" class="del_yr">移入收藏夹</a>
-                        -->
-                        <a href="javascript:;" class="del_d">删除</a>
-                    </div>
-                </div>
-                <div class="imfor">
-                    <div class="check">
-                        <div class="Each">
-                            <span class="normal"><img src="../images/cart/product_normal.png" alt=""/></span>
-                        </div>
-                    </div>
-                    <div class="pudc">
-                        <div class="pudc_information" id="pudcId2">
-                            <img src="../images/cart/product_simg1.png" class="lf"/>
-                            <input type="hidden" name="" value="">
-                         <span class="des lf">
-                            联想(Lenovo)YOGA5 PRO 标配版电脑(i5-7200u 8G 512G SSD FHD IPS)银
-                               <input type="hidden" name="" value="">
-                        </span>
-                            <p class="col lf"><span>颜色：</span><span class="color_des">炫酷黑  <input type="hidden" name="" value=""></span></p>
-                        </div>
-                    </div>
-                    <div class="pices">
-                        <p class="pices_des">达内专享价</p>
-                        <p class="pices_information"><b>￥</b><span>4888.00</span></p>
-                    </div>
-                    <div class="num"><span class="reduc">&nbsp;-&nbsp;</span><input type="text" value="1" /><span class="add">&nbsp;+&nbsp;</span></div>
-                    <div class="totle">
-                        <span>￥</span>
-                        <span class="totle_information">4888.00</span>
-                    </div>
-                    <div class="del">
-                        <!-- <div>
-                           <img src="img/true.png" alt=""/>
-                           <span>已移入收藏夹</span>
-                       </div>
-                        <a href="javascript:;" class="del_yr">移入收藏夹</a>
-                       -->
-                        <a href="javascript:;" class="del_d">删除</a>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
             <div class="foot">
                 <div class="foot_check">

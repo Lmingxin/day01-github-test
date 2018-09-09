@@ -32,6 +32,47 @@
 				#{modifiedTime}
 			);
 	</insert>
+	
+	<!-- 查询某用户的购物车信息 -->
+	<!-- List<Cart> getListByUid(@Param("uid")Integer uid,@Param("offset") Integer offset,@Param("countPerPage") Integer countPerPage); -->
+	<select id="getListById" resultType="cn.tedu.store.entity.Cart">
+		SELECT
+			id,
+			uid,
+			goods_id goodsId,
+			num,
+			goods_image goodsImage,
+			goods_title goodsTitle,
+			goods_price goodsPrice
+		FROM
+			t_cart
+		WHERE
+			uid=#{uid}
+		ORDER BY
+			id DESC
+		LIMIT
+			#{offset}, #{countPerPage}
+	</select>
+	
+	<!-- 根据用户id商品id查询购物车信息 -->
+	<select id="getCartByUserAndGoods" resultType="cn.tedu.store.entity.Cart">
+		SELECT
+			num
+		FROM
+			t_cart
+		WHERE
+			uid=#{uid} AND goodsId=#{goodsId}
+	</select>
+	
+	<!-- 修改购物车某商品的数量 -->
+	<update id="changeNumber">
+		UPDATE
+			t_cart
+			SET
+			num=#{num}
+		WHERE
+			id=#{id} AND uid=#{uid}
+	</update>
 </mapper>
 
 

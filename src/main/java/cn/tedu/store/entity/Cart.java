@@ -8,7 +8,7 @@ public class Cart implements Serializable{
 
 	private Integer id;
 	private Integer uid;
-	private Long goods;
+	private Long goodsId;
 	private Integer num;
 	private String goodsImage;
 	private String goodsTitle;
@@ -22,12 +22,12 @@ public class Cart implements Serializable{
 	public Cart() {
 		super();
 	}
-	public Cart(Integer id, Integer uid, Long goods, Integer num, String goodsImage, String goodsTitle, Long goodsPrice,
+	public Cart(Integer id, Integer uid, Long goodsId, Integer num, String goodsImage, String goodsTitle, Long goodsPrice,
 			Date createdTime, Date modifiedTime, String createdUser, String modifiedUser) {
 		super();
 		this.id = id;
 		this.uid = uid;
-		this.goods = goods;
+		this.goodsId = goodsId;
 		this.num = num;
 		this.goodsImage = goodsImage;
 		this.goodsTitle = goodsTitle;
@@ -43,8 +43,8 @@ public class Cart implements Serializable{
 	public Integer getUid() {
 		return uid;
 	}
-	public Long getGoods() {
-		return goods;
+	public Long getGoodsId() {
+		return goodsId;
 	}
 	public Integer getNum() {
 		return num;
@@ -76,8 +76,8 @@ public class Cart implements Serializable{
 	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
-	public void setGoods(Long goods) {
-		this.goods = goods;
+	public void setGoods(Long goodsId) {
+		this.goodsId = goodsId;
 	}
 	public void setNum(Integer num) {
 		this.num = num;
@@ -105,7 +105,7 @@ public class Cart implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", uid=" + uid + ", goods=" + goods + ", num=" + num + ", goodsImage=" + goodsImage
+		return "Cart [id=" + id + ", uid=" + uid + ", goodsId=" + goodsId + ", num=" + num + ", goodsImage=" + goodsImage
 				+ ", goodsTitle=" + goodsTitle + ", goodsPrice=" + goodsPrice + ", createdTime=" + createdTime
 				+ ", modifiedTime=" + modifiedTime + ", createdUser=" + createdUser + ", modifiedUser=" + modifiedUser
 				+ "]";

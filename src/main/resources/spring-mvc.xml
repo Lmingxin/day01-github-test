@@ -42,6 +42,7 @@
   			<!-- mapping：拦截路径 -->
   			<mvc:mapping path="/user/**"/>
   			<mvc:mapping path="/address/**"/>
+  			<mvc:mapping path="/cart/**"/>
   			
   			<!-- exclude-mapping：白名单路径 -->
   			<mvc:exclude-mapping path="/user/reg.do"/>
