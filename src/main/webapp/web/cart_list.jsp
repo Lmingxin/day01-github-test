@@ -40,7 +40,7 @@
     </div>
 </div>
 <div class="big">
-    <form  name="" action="" method="post">
+    <form name="" action="../order/confirm.do" method="post">
     <section id="section" >
         <div id="title">
             <b>购物车</b>
@@ -69,10 +69,7 @@
                 <div class="imfor">
                     <div class="check">
                         <div class="Each">
-                            <span class="normal">
-                                <img src="../images/cart/product_normal.png" alt=""/>
-                            </span>
-                            <input type="hidden" name="" value="">
+                            <input type="checkbox" name="cart_ids" value="${cart.id }">
                         </div>
                     </div>
                     <div class="pudc">
@@ -90,7 +87,11 @@
                         <p class="pices_des">达内专享价</p>
                         <p class="pices_information"><b>￥</b><span>${cart.goodsPrice }.00  <input type="hidden" name="" value=""></span></p>
                     </div>
-                    <div class="num"><span class="reduc">&nbsp;-&nbsp;</span><input type="text" value="${cart.num }" ><span class="add">&nbsp;+&nbsp;</span></div>
+                    <div class="num">
+                    <span class="reduc" onclick="reduce(${cart.id})">&nbsp;-&nbsp;</span>
+                    <input type="text" value="${cart.num }" id="num-${cart.id }" />
+                    <span class="add">&nbsp;+&nbsp;</span>
+                    </div>
                     <div class="totle">
                         <span>￥</span>
                         <span class="totle_information">${cart.goodsPrice * cart.num }.00</span>
@@ -113,7 +114,9 @@
                 <a href="javascript:;" class="foot_del">删除</a>
                 <!--<a href="javascript:;" class="foot_yr">移入收藏夹</a>-->
                 <div class="foot_qk">清空失效商品</div>
-                <div class="foot_cash" id="go-buy">去结算</div>
+                <div class="foot_cash" id="go-buy">
+                	<input type="submit" value="去结算" />
+                </div>
                 <div class="foot_tol"><span>合计(不含运费):</span><span  class="foot_pices susumOne">0.00</span><span class='foot_des'>元</span></div>
                 <div class="foot_selected">
                     已选<span class="totalOne color">0</span>件商品
@@ -215,5 +218,37 @@
         window.location.href="orderConfirm.html";
     })
 </script>
+<script type="text/javascript">
+function reduce(id) {
+	var num = $("#num-" + id).val();
+	if (num <= 1) {
+		return;
+	}
+	num--;
+	var url = "change_number.do";
+	var data = "num=" + num +"&id=" + id;
+	$.ajax({
+		"url": url,
+		"data": data,
+		"type": "GET",
+		"dataType": "json",
+		"success": function(obj) {
+			if (obj.state == 0) {
+				alert(obj.message);
+			}
+		}
+	});
+}
+
+</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
